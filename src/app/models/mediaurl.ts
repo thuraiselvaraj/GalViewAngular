@@ -1,3 +1,3 @@
 export interface MediaUrl {
-url: string;
+    m: string;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FlickerResponse } from '../models/flickerresponse';
 import { FlickrService } from '../flickr.service';
 
 @Component({
@@ -8,14 +9,16 @@ import { FlickrService } from '../flickr.service';
 })
 export class PhotoGalleryComponent implements OnInit {
 
-  flickerResponse: Array<String>;  
+  flickerResponse: FlickerResponse;
 
   constructor(private flickrService: FlickrService) { }
 
   ngOnInit() {
-    
-      this.flickerResponse = this.flickrService.getPhotos();
-  
+    this.flickrService.getPhotos().subscribe( response => {
+      this.flickerResponse = response;
+    }, error => {
+      console.log(error);
+    });
   }
 
 }
